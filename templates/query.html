@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query {{ table }}</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Query {{ table }}</h1>
+        <nav>
+            <a href="/">Home</a>
+        </nav>
+    </header>
+    <main>
+        <form method="POST">
+            <label for="key">Enter Key (Primary ID):</label>
+            <input type="text" id="key" name="key" required>
+            <button type="submit">Search</button>
+        </form>
+        {% if result %}
+        <h2>Query Results</h2>
+        <table>
+            <thead>
+                <tr>{% for col in result[0].keys() %}<th>{{ col }}</th>{% endfor %}</tr>
+            </thead>
+            <tbody>
+                {% for row in result %}
+                <tr>{% for value in row.values() %}<td>{{ value }}</td>{% endfor %}</tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% elif result is not none %}
+        <p>No results found.</p>
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2025 circRNA Database</p>
+    </footer>
+</body>
+</html>

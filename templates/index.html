@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>circRNA Database</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>circRNA Database</h1>
+        <nav>
+            <a href="#overview">Overview</a>
+            <a href="#queries">Query</a>
+            <a href="#tools">Tools & API</a>
+        </nav>
+    </header>
+    <main>
+        <section id="overview">
+            <h2>Database Overview</h2>
+            <h3>circRNA Information</h3>
+            <table>
+                <thead>
+                    <tr><th>circAtlas_ID</th><th>Species</th><th>Position</th><th>Strand</th></tr>
+                </thead>
+                <tbody>
+                    {% for row in sample_data.circRNA_info %}
+                    <tr>
+                        <td>{{ row.circAtlas_ID }}</td><td>{{ row.Species }}</td><td>{{ row.Position }}</td><td>{{ row.Strand }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h3>Disease Associations</h3>
+            <table>
+                <thead>
+                    <tr><th>circRNA_name</th><th>Disease_Name</th><th>Expression_Pattern</th></tr>
+                </thead>
+                <tbody>
+                    {% for row in sample_data.circRNA_disease %}
+                    <tr>
+                        <td>{{ row.circRNA_name }}</td><td>{{ row.Disease_Name }}</td><td>{{ row.Expression_Pattern }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h3>Functional Annotations</h3>
+            <table>
+                <thead>
+                    <tr><th>circRNA_name</th><th>Function</th><th>Gene</th></tr>
+                </thead>
+                <tbody>
+                    {% for row in sample_data.circRNA_function %}
+                    <tr>
+                        <td>{{ row.circRNA_name }}</td><td>{{ row.Function }}</td><td>{{ row.Gene }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <section id="queries">
+            <h2>Query Tables</h2>
+            <ul>
+                <li><a href="/query/circRNA_info">Query circRNA Information</a></li>
+                <li><a href="/query/circRNA_disease">Query Disease Associations</a></li>
+                <li><a href="/query/circRNA_function">Query Functional Annotations</a></li>
+            </ul>
+        </section>
+        <section id="tools">
+            <h2>Tools & API</h2>
+            <p>Access circRNA data via the following APIs:</p>
+            <ul>
+                <li><code>/api/statistics</code>: Get database statistics</li>
+                <li><code>/api/circRNAs</code>: Get circRNA information</li>
+                <li><code>/api/diseases</code>: Get disease associations</li>
+                <li><code>/api/functions</code>: Get functional annotations</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 circRNA Database</p>
+    </footer>
+    <script src="static/js/script.js"></script>
+</body>
+</html>
