@@ -179,6 +179,3 @@ http://127.0.0.1:5000/api
 
 This project is open-source and available under the MIT License.
 
-------
-
-Anything else you'd like to add or adjust in the README? Let me know!
