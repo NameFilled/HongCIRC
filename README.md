@@ -4,13 +4,15 @@ HongCICR is a web application designed for exploring and querying circRNA data, 
 
 ![HongCICR Logo](static/images/logo.png)
 
+------
+
 ## Table of Contents
 
-1. [Features](#features)
-2. [Getting Started](#getting-started)
+1. [Features](https://chatgpt.com/c/6789e77e-efc8-8009-961e-ea5a07f27d40#features)
+2. [Getting Started](#Getting Started)
    - [Prerequisites](#prerequisites)
    - [Setup and Installation](#setup-and-installation)
-3. [Database Overview](#database-overview)
+3. [Database Overview](#Database Overview)
    - [Table: circRNA_information](#table-circrna_information)
    - [Table: circRNA_disease](#table-circrna_disease)
    - [Table: circRNA_function](#table-circrna_function)
@@ -22,14 +24,19 @@ HongCICR is a web application designed for exploring and querying circRNA data, 
 
 ## Features
 
-- **Interactive Web Interface**
+- Interactive Web Interface
   - View sample data from the database.
-  - Query individual tables using primary keys.
+  - Query individual tables using primary keys or species names.
   - Access database statistics.
-- **RESTful APIs**
+- RESTful APIs
   - Programmatic access to circRNA data, disease associations, and functional annotations.
-- **Easy Setup**
-  - Lightweight Flask-based backend and a responsive frontend built with HTML, CSS, and JavaScript.
+  - Flexible querying with parameters for specific use cases.
+- Enhanced Query System
+  - Query by primary IDs (e.g., circAtlas_ID) or other keys like species names.
+- Responsive Design
+  - Supports desktop and mobile views for better accessibility.
+
+------
 
 ## Getting Started
 
@@ -72,6 +79,8 @@ Ensure the following software is installed on your system:
    ```
 
 6. Open your browser and visit `http://127.0.0.1:5000` to access the application.
+
+------
 
 ## Database Overview
 
@@ -117,6 +126,8 @@ Ensure the following software is installed on your system:
 | Gene_Description | TEXT      | Description of the gene  |
 | PMID             | TEXT      | PubMed ID for references |
 
+------
+
 ## API Documentation
 
 ### Base URL
@@ -131,7 +142,7 @@ http://127.0.0.1:5000/api
 
    - **Description**: Retrieve basic statistics about the database.
 
-   - Response:
+   - **Response**:
 
      ```json
      {
@@ -156,6 +167,37 @@ http://127.0.0.1:5000/api
    - **Description**: Retrieve all functional annotations.
    - **Response**: Array of functional annotation records in JSON format.
 
+5. **GET /api/query**
+
+   - **Description**: Query specific tables using a flexible key-value parameter system.
+
+   - **Required Parameters**:
+
+     - `table`: The name of the table to query (e.g., `circRNA_info`, `circRNA_disease`, `circRNA_function`, `species`).
+     - `key`: The search key (e.g., circAtlas_ID or species name).
+
+   - **Example Request**:
+
+     ```bash
+     curl "http://127.0.0.1:5000/api/query?table=circRNA_info&key=hsa_circ_000056"
+     ```
+
+   - **Response**:
+
+     ```json
+     [
+         {
+             "circAtlas_ID": "hsa_circ_000056",
+             "Species": "Homo sapiens",
+             "Position": "chr5:12345-54321",
+             "Strand": "+",
+             ...
+         }
+     ]
+     ```
+
+------
+
 ## Usage Guide
 
 ### Accessing the Web Application
@@ -163,7 +205,7 @@ http://127.0.0.1:5000/api
 1. Launch the application by running `python app.py`.
 2. Navigate to `http://127.0.0.1:5000` in your browser.
 3. Use the homepage to explore sample data and access query pages.
-4. Query individual tables by entering primary keys.
+4. Query individual tables by entering primary keys or species names.
 
 ### Using the APIs
 
@@ -174,6 +216,8 @@ http://127.0.0.1:5000/api
   ```bash
   curl http://127.0.0.1:5000/api/statistics
   ```
+
+------
 
 ## License
 
