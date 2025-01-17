@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>circRNA Database</title>
-    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
     <header>
+        <img src="logo.png" alt="Logo" class="logo">
         <h1>circRNA Database</h1>
         <nav>
             <a href="#overview">Overview</a>
@@ -58,14 +59,17 @@
                 </tbody>
             </table>
         </section>
+        <br>
         <section id="queries">
             <h2>Query Tables</h2>
             <ul>
-                <li><a href="/query/circRNA_info">Query circRNA Information</a></li>
-                <li><a href="/query/circRNA_disease">Query Disease Associations</a></li>
-                <li><a href="/query/circRNA_function">Query Functional Annotations</a></li>
+                <li><a href="/query/circRNA_info" style="color: #5483b3;">Query circRNA Information</a></li>
+                <li><a href="/query/circRNA_disease" style="color: #5483b3;">Query Disease Associations</a></li>
+                <li><a href="/query/circRNA_function" style="color: #5483b3;">Query Functional Annotations</a></li>
+                <li><a href="/query/species" style="color: #5483b3;">Query by Species</a></li>
             </ul>
         </section>
+        <br>
         <section id="tools">
             <h2>Tools & API</h2>
             <p>Access circRNA data via the following APIs:</p>
@@ -74,6 +78,7 @@
                 <li><code>/api/circRNAs</code>: Get circRNA information</li>
                 <li><code>/api/diseases</code>: Get disease associations</li>
                 <li><code>/api/functions</code>: Get functional annotations</li>
+                <li><code>/api/query</code>: Query data (parameters: <code>table</code>, <code>key</code>)</li>
             </ul>
         </section>
     </main>
