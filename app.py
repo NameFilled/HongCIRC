@@ -23,11 +23,13 @@ def query(table):
     if request.method == 'POST':
         key = request.form.get('key')
         if table == 'circRNA_info':
-            result = circRNA_info[circRNA_info['circAtlas ID'] == key].to_dict(orient='records')
+            result = circRNA_info[circRNA_info['circAtlas_ID'] == key].to_dict(orient='records')
         elif table == 'circRNA_disease':
-            result = circRNA_disease[circRNA_disease['circAtlas ID'] == key].to_dict(orient='records')
+            result = circRNA_disease[circRNA_disease['circAtlas_ID'] == key].to_dict(orient='records')
         elif table == 'circRNA_function':
-            result = circRNA_function[circRNA_function['circRNA name'] == key].to_dict(orient='records')
+            result = circRNA_function[circRNA_function['circRNA_name'] == key].to_dict(orient='records')
+        elif table == 'species':
+            result = circRNA_info[circRNA_info['Species'].str.contains(key, case=False, na=False)].to_dict(orient='records')
         else:
             result = []
         return render_template('query.html', table=table, result=result)
@@ -56,6 +58,37 @@ def get_diseases():
 def get_functions():
     functions = circRNA_function.to_dict(orient='records')
     return jsonify(functions)
+
+@app.route('/api/query', methods=['GET'])
+def api_query():
+    """
+    Query the specified table based on query parameters.
+    Required parameters:
+    - table: The table to query (circRNA_info, circRNA_disease, circRNA_function, or species).
+    - key: The search key for the query.
+    """
+    table = request.args.get('table')
+    key = request.args.get('key')
+
+    if not table or not key:
+        return jsonify({"error": "Both 'table' and 'key' parameters are required."}), 400
+
+    result = []
+    if table == 'circRNA_info':
+        result = circRNA_info[circRNA_info['circAtlas_ID'] == key].to_dict(orient='records')
+    elif table == 'circRNA_disease':
+        result = circRNA_disease[circRNA_disease['circAtlas_ID'] == key].to_dict(orient='records')
+    elif table == 'circRNA_function':
+        result = circRNA_function[circRNA_function['circRNA_name'] == key].to_dict(orient='records')
+    elif table == 'species':
+        result = circRNA_info[circRNA_info['Species'].str.contains(key, case=False, na=False)].to_dict(orient='records')
+    else:
+        return jsonify({"error": f"Table '{table}' is not valid."}), 400
+
+    if not result:
+        return jsonify({"message": "No matching records found."}), 404
+
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run(debug=True)
