@@ -9,10 +9,10 @@ HongCICR is a web application designed for exploring and querying circRNA data, 
 ## Table of Contents
 
 1. [Features](https://chatgpt.com/c/6789e77e-efc8-8009-961e-ea5a07f27d40#features)
-2. [Getting Started](#Getting Started)
+2. [Getting Started](#getting-started)
    - [Prerequisites](#prerequisites)
    - [Setup and Installation](#setup-and-installation)
-3. [Database Overview](#Database Overview)
+3. [Database Overview](#database-overview)
    - [Table: circRNA_information](#table-circrna_information)
    - [Table: circRNA_disease](#table-circrna_disease)
    - [Table: circRNA_function](#table-circrna_function)
